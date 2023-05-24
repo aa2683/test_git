@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import h3pandas
 import geopandas
@@ -17,3 +11,8 @@ df_data = pd.DataFrame({'lng': [-73.993896, -73.976425, -73.968704, -73.976601, 
                         'lat':[40.700111, 40.739811, 40.754246, 40.751896, 40.745079, 40.775079, 40.805079]})
 
 df_data_h3 = df_data.h3.geo_to_h3(resolution = 7)
+df_data_h3 = df_data_h3.h3.h3_to_geo_boundary()
+df_data_h3['area_size'] = df_data_h3.h3.cell_area()['h3_cell_area']* 0.386102
+
+
+print(df_data_h3)
